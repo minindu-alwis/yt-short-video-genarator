@@ -2,12 +2,17 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
+import Header from "./_components/Header";
+import Hero from "./_components/Hero";
 
 export default function Home() {
   return (
-   <div>
-      <h1 className="text-3xl font-bold underline bg-blue-500">Hello world!</h1>
-      <Button>asdadad</Button>
+   <div className="md:px-16 lg:px-24 xl:px-36">
+      {/* {header} */}
+      <Header />
+      {/* {hero} */}
+      <Hero/>
+
    </div>
   );
 }
