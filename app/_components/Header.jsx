@@ -1,8 +1,12 @@
+"use client"
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import React from 'react'
+import Authentication from './Authentication'
+import { useAuthContext } from '../provider'
 
 function Header() {
+  const {user}=useAuthContext();
   return (
     <div className='p-4 flex items-center justify-between'>
     <div className='flex items-center gap-3'>
@@ -11,7 +15,18 @@ function Header() {
     </div>
 
     <div>
-      <Button>Get Started</Button>
+      {!user?
+      <Authentication>
+
+        <Button>Get Started</Button>
+
+
+      </Authentication>
+      :<div>
+        <Button>Dashboard</Button>
+        <Image src={user?.photoURL} alt='useImage' width={40} height={40} className='rounded-full'/>
+      </div>
+}
     </div>
     </div>
   )
