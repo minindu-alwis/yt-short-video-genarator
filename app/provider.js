@@ -27,6 +27,7 @@ function Provider({ children }) {
             pictureURL: user.photoURL || '',
           });
           console.log(result, "check result");
+          setUser(result); // Update user state with the result
         } catch (error) {
           console.error("Error creating user:", error);
         }

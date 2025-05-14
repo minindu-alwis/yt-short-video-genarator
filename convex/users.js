@@ -13,13 +13,15 @@ export const CreateNewUser = mutation({
         .collect();
 
         if(!user[0]?.email){
-            const result=await convexToJson.db.insert('users',{
-                name:args.name,
-                email:args.email,
-                pictureURL:args.pictureURL,
+            const userData={
+                name:args?.name,
+                email:args?.email,
+                pictureURL:args?.pictureURL,
                 credits:3
-            })
-            return result;
+            }
+
+            const result=await convexToJson.db.insert('users',userData)
+            return userData;
         }
         return user[0];
     }
