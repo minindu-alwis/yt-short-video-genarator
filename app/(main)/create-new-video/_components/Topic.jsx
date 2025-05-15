@@ -115,7 +115,7 @@ function Topic({onHandleInputChanges}) {
 
       </div>
 
-     <Button className='mt-3' size="sm" disabled={loading} onClick={GenarateScript}>{loading?<Loader2Icon className='animate-spin'/>:<SparklesIcon/>}Generate Script</Button>
+     {!script &&<Button className='mt-3' size="sm" disabled={loading} onClick={GenarateScript}>{loading?<Loader2Icon className='animate-spin'/>:<SparklesIcon/>}Generate Script</Button>}
 
     </div>
   )
