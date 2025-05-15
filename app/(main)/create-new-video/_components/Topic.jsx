@@ -21,7 +21,7 @@ const suggestions = [
   "Motivational Stories",
 ];
 
-function Topic() {
+function Topic({onHandleInputChanges}) {
   const [selectedTopic, setSelectedTopic] = useState(null);
 
   return (
@@ -42,7 +42,9 @@ function Topic() {
             <div className='flex flex-wrap'>
               {suggestions.map((suggestion) => (
                 <Button 
-                  onClick={() => setSelectedTopic(suggestion)} 
+                  onClick={() => {setSelectedTopic(suggestion)
+                    onHandleInputChanges('topic', suggestion)
+                  }} 
                   variant="outline"
                   key={suggestion}
                   className={`m-1 transition-all duration-200 ${
@@ -60,7 +62,9 @@ function Topic() {
             <div>
                 <h2>
                     Enter Your Own Topic
-                    <Textarea placeholder='Enter Your Topic Please' />
+                    <Textarea placeholder='Enter Your Topic Please'
+                    onChange={(event)=>onHandleInputChanges('topic', event.target.value)}
+                    />
                 </h2>
             </div>
           </TabsContent>

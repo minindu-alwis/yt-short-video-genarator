@@ -11,6 +11,7 @@ function CreateNewVideo() {
             ...prev,
             [fieldName]:fieldValue
         }))
+        console.log("minidu",formData);
     }
 
   return (
@@ -20,7 +21,7 @@ function CreateNewVideo() {
             <div className='col-span-2 p-7 border rounded-xl'>
 
                  {/* {Topic & Script} */}
-        <Topic/>
+        <Topic onHandleInputChanges={onHandleInputChanges}/>
         {/* {Video Image Style} */}
 
         {/* {Voice} */}
