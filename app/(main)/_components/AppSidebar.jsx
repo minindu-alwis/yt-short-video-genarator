@@ -64,7 +64,9 @@ function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupContent>
             <div className='mx-5'>
+              <Link href={'create-new-video'}>
                 <Button className={'w-full'}>+ Create New Video</Button>
+                </Link>
             </div>
             <SidebarMenu>
                 {MenuItems.map((menu,index)=>(
