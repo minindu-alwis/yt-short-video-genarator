@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { SparklesIcon } from 'lucide-react';
+import { Loader2Icon, SparklesIcon } from 'lucide-react';
 import axios from 'axios'
 
 const suggestions = [
@@ -27,16 +27,26 @@ function Topic({onHandleInputChanges}) {
   const [selectedTopic, setSelectedTopic] = useState(null);
 
   const [script, setScript] = useState()
+  const [loading, setLoading] = useState(false)
+
+  const [selectedScriptIndex, setSelectedScriptIndex] = useState();
 
   
 
 
   const GenarateScript=async()=>{
+    setLoading(true);
+    setSelectedScriptIndex(null)
+    try{
     const result=await axios.post('/api/genarate-script',{
         topic:selectedTopic
     })
     console.log(result.data)
     setScript(result.data?.scripts)
+}catch(e){
+    console.log(e)
+}
+    setLoading(false)
   }
 
   return (
@@ -84,9 +94,28 @@ function Topic({onHandleInputChanges}) {
             </div>
           </TabsContent>
         </Tabs>
+
+        
+            {script?.length>0&&
+            <div className='mt-3'>
+                <h2>Select The Script</h2>
+            <div className='grid grid-cols-2 gap-5 mt-1'>
+                {script?.map((item,index)=>(
+                    <div key={index} className={`p-3 border cursor-pointer rounded-lg ${selectedScriptIndex == index && 'border-white bg-secondary'}`}
+                    onClick={()=>setSelectedScriptIndex(index)}
+                    >
+                        <h2 className='line-clamp-4 text-sm text-gray-300'>{item.content}</h2>
+                    </div>
+                ))}
+
+
+        </div>
+        </div>
+        }
+
       </div>
 
-     <Button className='mt-3' size="sm" onClick={GenarateScript}><SparklesIcon/>Generate Script</Button>
+     <Button className='mt-3' size="sm" disabled={loading} onClick={GenarateScript}>{loading?<Loader2Icon className='animate-spin'/>:<SparklesIcon/>}Generate Script</Button>
 
     </div>
   )
