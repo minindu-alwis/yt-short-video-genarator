@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import Topic from './_components/Topic'
+import VideoStyle from './_components/VideoStyle';
 
 function CreateNewVideo() {
 
@@ -23,7 +24,7 @@ function CreateNewVideo() {
                  {/* {Topic & Script} */}
         <Topic onHandleInputChanges={onHandleInputChanges}/>
         {/* {Video Image Style} */}
-
+        <VideoStyle onHandleInputChanges={onHandleInputChanges}/>
         {/* {Voice} */}
 
         {/* {Captions} */}
