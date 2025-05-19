@@ -1,18 +1,28 @@
 <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Gradients -->
+    <!-- Enhanced Gradients -->
     <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FF3366" stop-opacity="1">
-        <animate attributeName="stop-color" values="#FF3366;#FF9900;#FF3366" dur="5s" repeatCount="indefinite" />
+        <animate attributeName="stop-color" values="#FF3366;#FF9900;#FF3366" dur="6s" repeatCount="indefinite" />
       </stop>
       <stop offset="100%" stop-color="#7C4DFF" stop-opacity="1">
-        <animate attributeName="stop-color" values="#7C4DFF;#00CCFF;#7C4DFF" dur="5s" repeatCount="indefinite" />
+        <animate attributeName="stop-color" values="#7C4DFF;#00CCFF;#7C4DFF" dur="6s" repeatCount="indefinite" />
       </stop>
     </linearGradient>
     
-    <!-- Filters for glow effects -->
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </radialGradient>
+    
+    <!-- Enhanced Filters -->
     <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    
+    <filter id="textGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
     
@@ -20,104 +30,155 @@
     <path id="orbit" d="M150,150 m-75,0 a75,75 0 1,0 150,0 a75,75 0 1,0 -150,0" />
   </defs>
   
-  <!-- Background circles -->
+  <!-- Enhanced Background -->
   <g class="background">
+    <circle cx="150" cy="150" r="130" fill="none" stroke="url(#mainGradient)" stroke-width="1" opacity="0.2">
+      <animate attributeName="r" values="125;130;125" dur="10s" repeatCount="indefinite" />
+    </circle>
     <circle cx="150" cy="150" r="110" fill="none" stroke="url(#mainGradient)" stroke-width="2" opacity="0.5">
-      <animate attributeName="r" values="100;110;100" dur="4s" repeatCount="indefinite" />
+      <animate attributeName="r" values="100;110;100" dur="7s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.3;0.6;0.3" dur="4s" repeatCount="indefinite" />
     </circle>
     <circle cx="150" cy="150" r="90" fill="none" stroke="url(#mainGradient)" stroke-width="2" opacity="0.7">
-      <animate attributeName="r" values="85;90;85" dur="3s" repeatCount="indefinite" />
+      <animate attributeName="r" values="85;90;85" dur="5s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.5;0.8;0.5" dur="3s" repeatCount="indefinite" />
+    </circle>
+    
+    <!-- Subtle central glow -->
+    <circle cx="150" cy="150" r="40" fill="url(#centerGlow)" opacity="0.3">
+      <animate attributeName="opacity" values="0.2;0.4;0.2" dur="3s" repeatCount="indefinite" />
+      <animate attributeName="r" values="35;40;35" dur="5s" repeatCount="indefinite" />
     </circle>
   </g>
   
-  <!-- Main "boom" symbol -->
+  <!-- Main "boom" symbol with enhanced design -->
   <g class="boom-symbol" filter="url(#glow)">
-    <!-- Central Star -->
-    <path d="M150,150 l25,-10 l-10,25 l25,5 l-25,10 l10,25 l-25,-5 l-10,25 l-5,-25 l-25,10 l10,-25 l-25,-5 l25,-10 l-10,-25 l25,5 z" fill="url(#mainGradient)">
-      <animateTransform attributeName="transform" type="rotate" from="0 150 150" to="360 150 150" dur="20s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.9;1;0.9" dur="2s" repeatCount="indefinite" />
+    <!-- Enhanced Central Star -->
+    <path d="M150,150 l28,-12 l-12,28 l28,6 l-28,12 l12,28 l-28,-6 l-12,28 l-6,-28 l-28,12 l12,-28 l-28,-6 l28,-12 l-12,-28 l28,6 z" fill="url(#mainGradient)">
+      <animateTransform attributeName="transform" type="rotate" from="0 150 150" to="360 150 150" dur="24s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite" />
     </path>
     
-    <!-- Orbit Elements -->
+    <!-- Enhanced central pulse -->
+    <circle cx="150" cy="150" r="15" fill="url(#mainGradient)" opacity="0.8">
+      <animate attributeName="r" values="12;15;12" dur="2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" />
+    </circle>
+    
+    <!-- Enhanced Orbit Elements -->
     <g class="orbiting-elements">
-      <!-- 8 Small squares that orbit -->
-      <rect x="-6" y="-6" width="12" height="12" fill="url(#mainGradient)">
-        <animateMotion dur="5s" repeatCount="indefinite" path="M150,150 m-75,0 a75,75 0 1,0 150,0 a75,75 0 1,0 -150,0" />
-        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="5s" repeatCount="indefinite" />
-      </rect>
+      <!-- 8 stylized elements that orbit -->
+      <path d="M-8,-8 L8,-8 L8,8 L-8,8 z" fill="url(#mainGradient)">
+        <animateMotion dur="8s" repeatCount="indefinite" path="M150,150 m-85,0 a85,85 0 1,0 170,0 a85,85 0 1,0 -170,0" />
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="8s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" repeatCount="indefinite" />
+      </path>
       
-      <rect x="-6" y="-6" width="12" height="12" fill="url(#mainGradient)">
-        <animateMotion dur="5s" begin="0.625s" repeatCount="indefinite" path="M150,150 m-75,0 a75,75 0 1,0 150,0 a75,75 0 1,0 -150,0" />
-        <animateTransform attributeName="transform" type="rotate" from="45" to="405" dur="5s" repeatCount="indefinite" />
-      </rect>
+      <path d="M-8,-8 L8,-8 L0,8 z" fill="url(#mainGradient)">
+        <animateMotion dur="8s" begin="1s" repeatCount="indefinite" path="M150,150 m-85,0 a85,85 0 1,0 170,0 a85,85 0 1,0 -170,0" />
+        <animateTransform attributeName="transform" type="rotate" from="45" to="405" dur="8s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" begin="0.5s" repeatCount="indefinite" />
+      </path>
       
-      <rect x="-6" y="-6" width="12" height="12" fill="url(#mainGradient)">
-        <animateMotion dur="5s" begin="1.25s" repeatCount="indefinite" path="M150,150 m-75,0 a75,75 0 1,0 150,0 a75,75 0 1,0 -150,0" />
-        <animateTransform attributeName="transform" type="rotate" from="90" to="450" dur="5s" repeatCount="indefinite" />
-      </rect>
+      <circle r="6" fill="url(#mainGradient)">
+        <animateMotion dur="8s" begin="2s" repeatCount="indefinite" path="M150,150 m-85,0 a85,85 0 1,0 170,0 a85,85 0 1,0 -170,0" />
+        <animate attributeName="r" values="5;6;5" dur="2s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" begin="1s" repeatCount="indefinite" />
+      </circle>
       
-      <rect x="-6" y="-6" width="12" height="12" fill="url(#mainGradient)">
-        <animateMotion dur="5s" begin="1.875s" repeatCount="indefinite" path="M150,150 m-75,0 a75,75 0 1,0 150,0 a75,75 0 1,0 -150,0" />
-        <animateTransform attributeName="transform" type="rotate" from="135" to="495" dur="5s" repeatCount="indefinite" />
-      </rect>
+      <path d="M-5,-5 L5,-5 L5,5 L-5,5 z" fill="url(#mainGradient)">
+        <animateMotion dur="8s" begin="3s" repeatCount="indefinite" path="M150,150 m-85,0 a85,85 0 1,0 170,0 a85,85 0 1,0 -170,0" />
+        <animateTransform attributeName="transform" type="rotate" from="135" to="495" dur="8s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" begin="1.5s" repeatCount="indefinite" />
+      </path>
       
-      <rect x="-6" y="-6" width="12" height="12" fill="url(#mainGradient)">
-        <animateMotion dur="5s" begin="2.5s" repeatCount="indefinite" path="M150,150 m-75,0 a75,75 0 1,0 150,0 a75,75 0 1,0 -150,0" />
-        <animateTransform attributeName="transform" type="rotate" from="180" to="540" dur="5s" repeatCount="indefinite" />
-      </rect>
+      <path d="M0,-8 L8,0 L0,8 L-8,0 z" fill="url(#mainGradient)">
+        <animateMotion dur="8s" begin="4s" repeatCount="indefinite" path="M150,150 m-85,0 a85,85 0 1,0 170,0 a85,85 0 1,0 -170,0" />
+        <animateTransform attributeName="transform" type="rotate" from="180" to="540" dur="8s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" begin="2s" repeatCount="indefinite" />
+      </path>
       
-      <rect x="-6" y="-6" width="12" height="12" fill="url(#mainGradient)">
-        <animateMotion dur="5s" begin="3.125s" repeatCount="indefinite" path="M150,150 m-75,0 a75,75 0 1,0 150,0 a75,75 0 1,0 -150,0" />
-        <animateTransform attributeName="transform" type="rotate" from="225" to="585" dur="5s" repeatCount="indefinite" />
-      </rect>
+      <circle r="5" fill="url(#mainGradient)">
+        <animateMotion dur="8s" begin="5s" repeatCount="indefinite" path="M150,150 m-85,0 a85,85 0 1,0 170,0 a85,85 0 1,0 -170,0" />
+        <animate attributeName="r" values="5;6;5" dur="2s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" begin="2.5s" repeatCount="indefinite" />
+      </circle>
       
-      <rect x="-6" y="-6" width="12" height="12" fill="url(#mainGradient)">
-        <animateMotion dur="5s" begin="3.75s" repeatCount="indefinite" path="M150,150 m-75,0 a75,75 0 1,0 150,0 a75,75 0 1,0 -150,0" />
-        <animateTransform attributeName="transform" type="rotate" from="270" to="630" dur="5s" repeatCount="indefinite" />
-      </rect>
+      <path d="M-8,-8 L8,8 M-8,8 L8,-8" stroke="url(#mainGradient)" stroke-width="3" fill="none">
+        <animateMotion dur="8s" begin="6s" repeatCount="indefinite" path="M150,150 m-85,0 a85,85 0 1,0 170,0 a85,85 0 1,0 -170,0" />
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" begin="3s" repeatCount="indefinite" />
+      </path>
       
-      <rect x="-6" y="-6" width="12" height="12" fill="url(#mainGradient)">
-        <animateMotion dur="5s" begin="4.375s" repeatCount="indefinite" path="M150,150 m-75,0 a75,75 0 1,0 150,0 a75,75 0 1,0 -150,0" />
-        <animateTransform attributeName="transform" type="rotate" from="315" to="675" dur="5s" repeatCount="indefinite" />
-      </rect>
+      <path d="M-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0" fill="url(#mainGradient)">
+        <animateMotion dur="8s" begin="7s" repeatCount="indefinite" path="M150,150 m-85,0 a85,85 0 1,0 170,0 a85,85 0 1,0 -170,0" />
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" begin="3.5s" repeatCount="indefinite" />
+      </path>
     </g>
     
-    <!-- Burst rays -->
+    <!-- Enhanced Burst rays -->
     <g class="burst-rays">
-      <path d="M150,150 l-45,-90" stroke="url(#mainGradient)" stroke-width="3" fill="none">
-        <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite" />
+      <path d="M150,150 l-60,-110" stroke="url(#mainGradient)" stroke-width="2.5" fill="none">
+        <animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite" />
       </path>
-      <path d="M150,150 l45,-90" stroke="url(#mainGradient)" stroke-width="3" fill="none">
-        <animate attributeName="opacity" values="0;1;0" dur="2s" begin="0.25s" repeatCount="indefinite" />
+      <path d="M150,150 l60,-110" stroke="url(#mainGradient)" stroke-width="2.5" fill="none">
+        <animate attributeName="opacity" values="0;1;0" dur="3s" begin="0.375s" repeatCount="indefinite" />
       </path>
-      <path d="M150,150 l90,-45" stroke="url(#mainGradient)" stroke-width="3" fill="none">
-        <animate attributeName="opacity" values="0;1;0" dur="2s" begin="0.5s" repeatCount="indefinite" />
+      <path d="M150,150 l110,-60" stroke="url(#mainGradient)" stroke-width="2.5" fill="none">
+        <animate attributeName="opacity" values="0;1;0" dur="3s" begin="0.75s" repeatCount="indefinite" />
       </path>
-      <path d="M150,150 l90,45" stroke="url(#mainGradient)" stroke-width="3" fill="none">
-        <animate attributeName="opacity" values="0;1;0" dur="2s" begin="0.75s" repeatCount="indefinite" />
+      <path d="M150,150 l110,60" stroke="url(#mainGradient)" stroke-width="2.5" fill="none">
+        <animate attributeName="opacity" values="0;1;0" dur="3s" begin="1.125s" repeatCount="indefinite" />
       </path>
-      <path d="M150,150 l45,90" stroke="url(#mainGradient)" stroke-width="3" fill="none">
-        <animate attributeName="opacity" values="0;1;0" dur="2s" begin="1s" repeatCount="indefinite" />
+      <path d="M150,150 l60,110" stroke="url(#mainGradient)" stroke-width="2.5" fill="none">
+        <animate attributeName="opacity" values="0;1;0" dur="3s" begin="1.5s" repeatCount="indefinite" />
       </path>
-      <path d="M150,150 l-45,90" stroke="url(#mainGradient)" stroke-width="3" fill="none">
-        <animate attributeName="opacity" values="0;1;0" dur="2s" begin="1.25s" repeatCount="indefinite" />
+      <path d="M150,150 l-60,110" stroke="url(#mainGradient)" stroke-width="2.5" fill="none">
+        <animate attributeName="opacity" values="0;1;0" dur="3s" begin="1.875s" repeatCount="indefinite" />
       </path>
-      <path d="M150,150 l-90,45" stroke="url(#mainGradient)" stroke-width="3" fill="none">
-        <animate attributeName="opacity" values="0;1;0" dur="2s" begin="1.5s" repeatCount="indefinite" />
+      <path d="M150,150 l-110,60" stroke="url(#mainGradient)" stroke-width="2.5" fill="none">
+        <animate attributeName="opacity" values="0;1;0" dur="3s" begin="2.25s" repeatCount="indefinite" />
       </path>
-      <path d="M150,150 l-90,-45" stroke="url(#mainGradient)" stroke-width="3" fill="none">
-        <animate attributeName="opacity" values="0;1;0" dur="2s" begin="1.75s" repeatCount="indefinite" />
+      <path d="M150,150 l-110,-60" stroke="url(#mainGradient)" stroke-width="2.5" fill="none">
+        <animate attributeName="opacity" values="0;1;0" dur="3s" begin="2.625s" repeatCount="indefinite" />
       </path>
     </g>
   </g>
   
-  <!-- Text "SHORT BOOM" -->
+  <!-- Enhanced Text "SHORT BOOM" -->
   <g class="logo-text">
-    <text x="150" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="24" fill="url(#mainGradient)" filter="url(#glow)">
+    <!-- Text shadow effect -->
+    <text x="150" y="230" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="28" fill="rgba(0,0,0,0.3)" filter="url(#textGlow)" opacity="0.6">
       SHORT BOOM
-      <animate attributeName="font-size" values="24;26;24" dur="2s" repeatCount="indefinite" />
     </text>
+    
+    <!-- Main text -->
+    <text x="150" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="28" fill="url(#mainGradient)" filter="url(#textGlow)">
+      SHORT BOOM
+      <animate attributeName="font-size" values="28;30;28" dur="3s" repeatCount="indefinite" />
+    </text>
+  </g>
+  
+  <!-- Subtle particle system -->
+  <g class="particles">
+    <circle cx="170" cy="130" r="1.5" fill="#FFFFFF">
+      <animate attributeName="opacity" values="0;0.8;0" dur="2s" begin="0s" repeatCount="indefinite" />
+      <animate attributeName="cy" values="130;110;130" dur="2s" begin="0s" repeatCount="indefinite" />
+      <animate attributeName="cx" values="170;175;170" dur="2s" begin="0s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="130" cy="170" r="1" fill="#FFFFFF">
+      <animate attributeName="opacity" values="0;0.8;0" dur="2.5s" begin="0.5s" repeatCount="indefinite" />
+      <animate attributeName="cy" values="170;190;170" dur="2.5s" begin="0.5s" repeatCount="indefinite" />
+      <animate attributeName="cx" values="130;125;130" dur="2.5s" begin="0.5s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="190" cy="160" r="1.2" fill="#FFFFFF">
+      <animate attributeName="opacity" values="0;0.8;0" dur="3s" begin="1s" repeatCount="indefinite" />
+      <animate attributeName="cy" values="160;150;160" dur="3s" begin="1s" repeatCount="indefinite" />
+      <animate attributeName="cx" values="190;200;190" dur="3s" begin="1s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="110" cy="140" r="1.3" fill="#FFFFFF">
+      <animate attributeName="opacity" values="0;0.8;0" dur="2s" begin="1.5s" repeatCount="indefinite" />
+      <animate attributeName="cy" values="140;120;140" dur="2s" begin="1.5s" repeatCount="indefinite" />
+      <animate attributeName="cx" values="110;100;110" dur="2s" begin="1.5s" repeatCount="indefinite" />
+    </circle>
   </g>
 </svg>
