@@ -30,7 +30,7 @@ function CreateNewVideo() {
         {/* {Voice} */}
         <Voice  onHandleInputChanges={onHandleInputChanges}/>
         {/* {Captions} */}
-        <Captions/>
+        <Captions onHandleInputChanges={onHandleInputChanges}/>
                 
             </div>
             <div>
