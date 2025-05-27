@@ -8,8 +8,15 @@ import { Button } from '@/components/ui/button';
 import { WandSparkles } from 'lucide-react';
 import Preview from './_components/Preview';
 import axios from 'axios';
+import { useMutation } from 'convex/react';
+import { useAuthContext } from '@/app/provider';
+import { api } from '@/convex/_generated/api';
 
 function CreateNewVideo() {
+
+    const CreateInitialVideoRecord=useMutation(api.videoData.CreateVideoData)
+
+    const {user} = useAuthContext()
 
     const [formData, setFormData] = useState();
 
@@ -27,10 +34,25 @@ function CreateNewVideo() {
   console.log("ERROR", "Please Fill All Fields");
   return;
 }
-    const result=await axios.post('api/genarate-video-data',{
-        ...formData
+
+    //save video to database
+    const resp=await CreateInitialVideoRecord({
+        title:formData.title,
+        topic:formData.topic,
+        script:formData.script,
+        videoStyle:formData.videoStyle,
+        caption:formData.caption,
+        voice:formData.voice,
+        uid:user?._id,
+        createdBy:user?.email, // Replace with actual user name
     }) ;
-    console.log("Genarate Video Result",result);
+    console.log("Genarate Video Result",resp)
+
+    //     const result=await axios.post('api/genarate-video-data',{
+    //         ...formData
+    //     }) ;
+    //     console.log("Genarate Video Result",result);
+    // }
 }
 
   return (
@@ -60,5 +82,4 @@ function CreateNewVideo() {
     </div>
   )
 }
-
 export default CreateNewVideo
