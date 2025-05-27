@@ -38,7 +38,7 @@ const Captions = ({onHandleInputChanges}) => {
                 {options.map((option, index) => (
                     <div key={index} 
                     onClick={() =>{ setSelectedCaptionStyle(option.name)
-                        onHandleInputChanges(option.name, option.style)
+                        onHandleInputChanges('caption',option)
                     }}
                     className={`p-2 hover:border background-slate-900 border-gray-400 cursor-pointer rounded-lg ${selectedCationStyle == option.name && 'border'}`}>
                         <h2 className={option.style}>{option.name}</h2>

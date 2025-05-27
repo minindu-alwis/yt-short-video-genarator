@@ -9,7 +9,8 @@ function Preview({ formData }) {
   );
 
   return (
-    <div>
+    <div className='relative'>
+        <h2 className='mb-3 text-2xl'>Preview</h2>
       {selectVideoStyle?.image ? (
         <Image 
           src={selectVideoStyle.image} 
@@ -21,6 +22,7 @@ function Preview({ formData }) {
       ) : (
         <p>No video style selected or image unavailable.</p>
       )}
+      <h2 className={`${formData?.caption?.style} absolute bottom-8 text-center w-full `}>{formData?.caption?.name}</h2>
     </div>
   );
 }
