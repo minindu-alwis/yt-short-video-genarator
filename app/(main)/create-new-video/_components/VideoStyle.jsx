@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-const options = [
+export const options = [
     {
         name: 'Realistic',
         image: '/realistic.png'
@@ -43,7 +43,7 @@ function VideoStyle({ onHandleInputChanges }) {
                         className='relative'
                         onClick={() => {
                             setSelectedStyle(option.name);
-                            onHandleInputChanges('imageStyle', option.name);
+                            onHandleInputChanges('videoStyle', option.name);
                         }}
                     >
                         <Image

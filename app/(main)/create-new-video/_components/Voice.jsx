@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 
 
-const voiceOptions = [
+export const voiceOptions = [
     {
         "value": 'af_sarah',
         "name": '🎉 Sarah (Female)'
