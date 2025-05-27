@@ -6,6 +6,7 @@ import Voice from './_components/Voice';
 import Captions from './_components/Captions';
 import { Button } from '@/components/ui/button';
 import { WandSparkles } from 'lucide-react';
+import Preview from './_components/Preview';
 
 function CreateNewVideo() {
 
@@ -22,7 +23,7 @@ function CreateNewVideo() {
   return (
     <div>
         <h2 className='text-3xl'>Create New Video</h2>
-        <div className='grid grid-cols-1 md:grid-cols-3 mt-8'>
+        <div className='grid grid-cols-1 md:grid-cols-3 mt-8 gap-7'>
             <div className='col-span-2 p-7 border rounded-xl h-[75vh] overflow-auto'>
 
                  {/* {Topic & Script} */}
@@ -38,7 +39,7 @@ function CreateNewVideo() {
                 </Button>
             </div>
             <div>
-
+            <Preview formData={formData} />
             </div>
         </div>
        
