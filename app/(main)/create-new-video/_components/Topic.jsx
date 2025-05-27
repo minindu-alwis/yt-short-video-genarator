@@ -102,7 +102,9 @@ function Topic({onHandleInputChanges}) {
             <div className='grid grid-cols-2 gap-5 mt-1'>
                 {script?.map((item,index)=>(
                     <div key={index} className={`p-3 border cursor-pointer rounded-lg ${selectedScriptIndex == index && 'border-white bg-secondary'}`}
-                    onClick={()=>setSelectedScriptIndex(index)}
+                    onClick={()=>{setSelectedScriptIndex(index);
+                      onHandleInputChanges('script', item?.content)}
+                    }
                     >
                         <h2 className='line-clamp-4 text-sm text-gray-300'>{item.content}</h2>
                     </div>

@@ -7,6 +7,7 @@ import Captions from './_components/Captions';
 import { Button } from '@/components/ui/button';
 import { WandSparkles } from 'lucide-react';
 import Preview from './_components/Preview';
+import axios from 'axios';
 
 function CreateNewVideo() {
 
@@ -19,6 +20,18 @@ function CreateNewVideo() {
         }))
         console.log("minidu",formData);
     }
+
+
+    const GenarateVideo=async()=>{
+       if (!formData?.topic || !formData?.script || !formData?.videoStyle || !formData?.voice || !formData?.caption || !formData?.title) {
+  console.log("ERROR", "Please Fill All Fields");
+  return;
+}
+    const result=await axios.post('api/genarate-video-data',{
+        ...formData
+    }) ;
+    console.log("Genarate Video Result",result);
+}
 
   return (
     <div>
@@ -34,7 +47,8 @@ function CreateNewVideo() {
         <Voice  onHandleInputChanges={onHandleInputChanges}/>
         {/* {Captions} */}
         <Captions onHandleInputChanges={onHandleInputChanges}/>
-                <Button className='w-full mt-5 cursor-pointer'>
+                <Button className='w-full mt-5 cursor-pointer'
+                onClick={GenarateVideo}>
                     <WandSparkles/> Genarate Video
                 </Button>
             </div>
