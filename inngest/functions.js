@@ -1,5 +1,6 @@
 import axios from "axios";
 import { inngest } from "./client";
+import { createClient } from "@deepgram/sdk";
 
 export const helloWorld = inngest.createFunction(
     { id: "hello-world" },
@@ -22,24 +23,45 @@ export const GenarateVideoData = inngest.createFunction(
         const GenarateAudioFile = await step.run(
             "GenarateAudioFile", async () => {
 
-                const result = await axios.post(BASE_URL + '/api/text-to-speech',
-                    {
-                        input: script,
-                        voice: voice
-                    },
-                    {
-                        headers: {
-                            'x-api-key': process.env.NEXT_PUBLIC_AIGURULAB_API_KEY, // Your API Key
-                            'Content-Type': 'application/json', // Content Type
-                        },
-                    })
-                console.log(result.data.audio) //Output Result: Audio Mp3 Url
+                // const result = await axios.post(BASE_URL + '/api/text-to-speech',
+                //     {
+                //         input: script,
+                //         voice: voice
+                //     },
+                //     {
+                //         headers: {
+                //             'x-api-key': process.env.NEXT_PUBLIC_AIGURULAB_API_KEY, // Your API Key
+                //             'Content-Type': 'application/json', // Content Type
+                //         },
+                //     })
+                // console.log(result.data.audio) //Output Result: Audio Mp3 Url
 
 
-                return result.data.audio;
+                // return result.data.audio;
+                return "https://firebasestorage.googleapis.com/v0/b/projects-2025-71366.firebasestorage.app/o/audio%2F1748785674547.mp3?alt=media&token=4e2f93a4-0006-4323-a4c3-438959b09454"
             });
 
         //Genarate Captions
+        const GenaratedCaptions = await step.run(
+            "genarateCaptions",
+            async () => {
+                const deepgram = createClient(process.env.NEXT_PUBLIC_DEEPGRAM_API_KEY);
+
+                const { result, error } = await deepgram.listen.prerecorded.transcribeUrl(
+                    {
+                        url: GenarateAudioFile,
+                    },
+                    // STEP 3: Configure Deepgram options for audio analysis
+                    {
+                        model: "nova-3",
+                        smart_format: true,
+                    }
+                );
+                return result;
+            }
+
+
+        )
 
         //Genarate Image Promt From  Script
 
@@ -47,7 +69,7 @@ export const GenarateVideoData = inngest.createFunction(
 
         //Save All To database
 
-        return GenarateAudioFile;
+        return GenaratedCaptions;
     }
 )
 
