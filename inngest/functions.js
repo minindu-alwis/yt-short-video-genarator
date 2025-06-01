@@ -57,7 +57,7 @@ export const GenarateVideoData = inngest.createFunction(
                         smart_format: true,
                     }
                 );
-                return result;
+                return result.results?.channels[0]?.alternatives[0]?.words;
             }
 
 
