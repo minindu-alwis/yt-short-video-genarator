@@ -11,6 +11,16 @@ export const helloWorld = inngest.createFunction(
     },
 );
 
+const ImagePromtScript = `Genarate Image promt of (style) style
+with all details for each scene for 30 seconds video : script : {script}
+- Just Give specifing image prompt depends on story line 
+- don not give camera angle image promt
+-follow the following schema and return JSON data (MAX 4-5 Images)
+-[{
+    imagePrompt:'',
+    sceneContetnt: '<Script Content>'
+}]`
+
 
 const BASE_URL = 'https://aigurulab.tech';
 export const GenarateVideoData = inngest.createFunction(
