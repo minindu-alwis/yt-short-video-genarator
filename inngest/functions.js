@@ -1,6 +1,7 @@
 import axios from "axios";
 import { inngest } from "./client";
 import { createClient } from "@deepgram/sdk";
+import { GenarateImageScript } from "@/configs/AiModel";
 
 export const helloWorld = inngest.createFunction(
     { id: "hello-world" },
@@ -52,34 +53,45 @@ export const GenarateVideoData = inngest.createFunction(
             });
 
         //Genarate Captions
-        const GenaratedCaptions = await step.run(
-            "genarateCaptions",
-            async () => {
-                const deepgram = createClient(process.env.NEXT_PUBLIC_DEEPGRAM_API_KEY);
+        // const GenaratedCaptions = await step.run(
+        //     "genarateCaptions",
+        //     async () => {
+        //         const deepgram = createClient(process.env.NEXT_PUBLIC_DEEPGRAM_API_KEY);
 
-                const { result, error } = await deepgram.listen.prerecorded.transcribeUrl(
-                    {
-                        url: GenarateAudioFile,
-                    },
-                    // STEP 3: Configure Deepgram options for audio analysis
-                    {
-                        model: "nova-3",
-                        smart_format: true,
-                    }
-                );
-                return result.results?.channels[0]?.alternatives[0]?.words;
-            }
+        //         const { result, error } = await deepgram.listen.prerecorded.transcribeUrl(
+        //             {
+        //                 url: GenarateAudioFile,
+        //             },
+        //             // STEP 3: Configure Deepgram options for audio analysis
+        //             {
+        //                 model: "nova-3",
+        //                 smart_format: true,
+        //             }
+        //         );
+        //         return result.results?.channels[0]?.alternatives[0]?.words;
+        //     }
 
 
-        )
+        // )
 
         //Genarate Image Promt From  Script
+        const GenaratedImagePromts = await step.run(
+            "geanarateImagePromt",
+            async () =>{
+                const FINAL_PROMPT=ImagePromtScript.replace
+                ('{style}',videoStyle).replace('script',script);
+                const result=await GenarateImageScript.sendMessage(FINAL_PROMPT);
+                const resp=JSON.parse(result.response.text());
+
+                return resp;
+            }
+        )
 
         //Gwnarate Images using ai
 
         //Save All To database
 
-        return GenaratedCaptions;
+        return GenaratedImagePromts;
     }
 )
 
