@@ -1,6 +1,7 @@
 import axios from "axios";
 import { inngest } from "./client";
 import { createClient } from "@deepgram/sdk";
+import { GenarateImageScript } from "@/configs/AiModel";
 
 export const helloWorld = inngest.createFunction(
     { id: "hello-world" },
@@ -10,6 +11,16 @@ export const helloWorld = inngest.createFunction(
         return { message: `Hello ${event.data.email}!` };
     },
 );
+
+const ImagePromtScript = `Genarate Image promt of (style) style
+with all details for each scene for 30 seconds video : script : {script}
+- Just Give specifing image prompt depends on story line 
+- don not give camera angle image promt
+-follow the following schema and return JSON data (MAX 4-5 Images)
+-[{
+    imagePrompt:'',
+    sceneContetnt: '<Script Content>'
+}]`
 
 
 const BASE_URL = 'https://aigurulab.tech';
@@ -64,12 +75,22 @@ export const GenarateVideoData = inngest.createFunction(
         )
 
         //Genarate Image Promt From  Script
+         const GenaratedImagePromts = await step.run(
+            "geanarateImagePromt",
+            async () =>{
+                const FINAL_PROMPT=ImagePromtScript.replace
+                ('{style}',videoStyle).replace('script',script);
+                const result=await GenarateImageScript.sendMessage(FINAL_PROMPT);
+                const resp=JSON.parse(result.response.text());
 
+                return resp;
+            }
+        )
         //Gwnarate Images using ai
 
         //Save All To database
 
-        return GenaratedCaptions;
+        return GenaratedImagePromts;
     }
 )
 
