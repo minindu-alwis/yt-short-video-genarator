@@ -11,6 +11,7 @@ export const CreateVideoData=mutation({
                 voice:v.string(),
                 uid:v.id('users'),
                 createdBy:v.string(),
+                credits:v.number()
     },
     handler:async(convexToJson,args)=>{
         const result=await convexToJson.db.insert('videoData',{
@@ -24,6 +25,11 @@ export const CreateVideoData=mutation({
             createdBy:args.createdBy,
             status: 'pending',
         })
+
+        await convexToJson.db.patch(args.uid, {
+            credits:(args?.credits)-1
+        })
+
         return result;
     }
 })

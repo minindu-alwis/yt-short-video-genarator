@@ -54,12 +54,13 @@ function CreateNewVideo() {
         voice: formData.voice,
         uid: user?._id,
         createdBy: user?.email,
+        credits:user?.credits
       });
       console.log("Genarate Video Result", resp);
 
       const result = await axios.post('api/genarate-video-data', {
         ...formData,
-        recordId: resp
+        recordId: resp,
       });
       console.log("Genarate Video Result", result);
     } catch (err) {
