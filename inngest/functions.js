@@ -107,7 +107,7 @@ export const GenarateVideoData = inngest.createFunction(
                             },
                             {
                                 headers: {
-                                    'x-api-key': process.env.NEXT_PUBLIC_AIGURULAB_API_KEY, // Your API Key
+                                    'x-api-key': process.env.NEXT_PUBLIC_AIGURULAB_API_KEY2, // Your API Key
                                     'Content-Type': 'application/json', // Content Type
                                 },
                             })
@@ -140,6 +140,3 @@ export const GenarateVideoData = inngest.createFunction(
         return 'Execution Completed Successfully!';
     }
 )
-
-
-
