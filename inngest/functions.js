@@ -75,22 +75,53 @@ export const GenarateVideoData = inngest.createFunction(
         )
 
         //Genarate Image Promt From  Script
-         const GenaratedImagePromts = await step.run(
+        const GenaratedImagePromts = await step.run(
             "geanarateImagePromt",
-            async () =>{
-                const FINAL_PROMPT=ImagePromtScript.replace
-                ('{style}',videoStyle).replace('script',script);
-                const result=await GenarateImageScript.sendMessage(FINAL_PROMPT);
-                const resp=JSON.parse(result.response.text());
+            async () => {
+                const FINAL_PROMPT = ImagePromtScript.replace
+                    ('{style}', videoStyle).replace('script', script);
+                const result = await GenarateImageScript.sendMessage(FINAL_PROMPT);
+                const resp = JSON.parse(result.response.text());
 
                 return resp;
             }
         )
         //Gwnarate Images using ai
 
+        const GenarateImages = await step.run(
+            "genarateImages",
+            async () => {
+                let images = [];
+                images = await Promise.all(
+                    GenaratedImagePromts.map(async (element) => {
+                        const result = await axios.post(BASE_URL + '/api/generate-image',
+                            {
+                                width: 1024,
+                                height: 1024,
+                                input: element?.imagePrompt,
+                                model: 'sdxl',//'flux'
+                                aspectRatio: "1:1"//Applicable to Flux model only
+                            },
+                            {
+                                headers: {
+                                    'x-api-key': process.env.NEXT_PUBLIC_AIGURULAB_API_KEY, // Your API Key
+                                    'Content-Type': 'application/json', // Content Type
+                                },
+                            })
+                        console.log(result.data.image) //Output Result: Base 64 Image
+                            return result.data.image
+                    })
+                )
+                return images;
+                
+            }
+            
+            
+        )
+
         //Save All To database
 
-        return GenaratedImagePromts;
+        return GenarateImages;
     }
 )
 
