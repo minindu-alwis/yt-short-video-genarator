@@ -45,6 +45,10 @@ function VideoList() {
                                 height={500}
                                 className='w-full object-cover rounded-xl aspect-[2/3]'
                             />
+                            <div>
+                                <h2>{video?.title}</h2>
+                                <h2>{video?._creationTime}</h2>
+                            </div>
                         </div>
                     ))}
                 </div>
