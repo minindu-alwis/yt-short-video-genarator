@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Loader2Icon, SparklesIcon } from 'lucide-react';
 import axios from 'axios'
+import {toast} from 'sonner'
+import { useAuthContext } from '@/app/provider';
 
 const suggestions = [
   "Historic Story",
@@ -30,11 +32,17 @@ function Topic({onHandleInputChanges}) {
   const [loading, setLoading] = useState(false)
 
   const [selectedScriptIndex, setSelectedScriptIndex] = useState();
-
+  const { user } = useAuthContext();
   
 
 
   const GenarateScript=async()=>{
+
+    if(user?.credits<=0){
+      toast("please add credits to your account")
+      return;
+    }
+
     setLoading(true);
     setSelectedScriptIndex(null)
     try{

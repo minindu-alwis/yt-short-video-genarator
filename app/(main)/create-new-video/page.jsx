@@ -11,6 +11,7 @@ import axios from 'axios';
 import { useMutation } from 'convex/react';
 import { useAuthContext } from '@/app/provider';
 import { api } from '@/convex/_generated/api';
+import {toast} from 'sonner'
 
 function CreateNewVideo() {
 
@@ -29,6 +30,10 @@ function CreateNewVideo() {
   };
 
   const GenarateVideo = async () => {
+    if(user?.credits<=0){
+      toast("please add credits to your account")
+      return;
+    }
     if (
       !formData?.topic ||
       !formData?.script ||
