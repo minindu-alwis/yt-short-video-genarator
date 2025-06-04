@@ -56,7 +56,7 @@ export const UpdateVideoRecord=mutation({
 
 export const GetUserVideos = query({
   args: {
-    uid: v.optional(v.id('users')) // Now it's optional
+    uid: v.optional(v.id('users')) 
   },
   handler: async (ctx, args) => {
     if (!args.uid) return []; // Handle missing uid case
