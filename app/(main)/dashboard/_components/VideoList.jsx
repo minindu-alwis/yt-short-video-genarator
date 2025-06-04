@@ -35,7 +35,7 @@ function VideoList() {
                     </Link>
                 </div>
             ) : (
-                <div>
+                <div className='grid grid-cols-2 lg:grid-cols-3 xl-grid-cols-5 gap-5 mt-10'>
                     {videoList?.map((video, index) => (
                         <div key={video._id || index}> {/* Added key prop here */}
                             <Image 
@@ -43,6 +43,7 @@ function VideoList() {
                                 alt={video?.title}
                                 width={500}
                                 height={500}
+                                className='w-full object-cover rounded-xl aspect-[2/3]'
                             />
                         </div>
                     ))}
