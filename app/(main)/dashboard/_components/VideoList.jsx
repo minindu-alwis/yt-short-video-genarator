@@ -73,7 +73,8 @@ useEffect(() => {
             ) : (
                 <div className='grid grid-cols-2 lg:grid-cols-3 xl-grid-cols-5 gap-5 mt-10'>
                     {videoList?.map((video, index) => (
-                        <div key={index}> {/* Added key prop here */}
+                        <Link href={'/play-video/'+video?._id} key={index}>
+                        <div > {/* Added key prop here */}
                            {video?.status=='completed'? <Image 
                                 src={video?.images[0]}
                                 alt={video?.title}
@@ -90,6 +91,7 @@ useEffect(() => {
                                 <h2>{moment(video?._creationTime).fromNow()}</h2>
                             </div>
                         </div>
+                        </Link>
                     ))}
                 </div>
             )}
