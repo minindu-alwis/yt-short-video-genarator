@@ -3,6 +3,7 @@ import { useAuthContext } from '@/app/provider';
 import { Button } from '@/components/ui/button';
 import { api } from '@/convex/_generated/api';
 import { useConvex } from 'convex/react';
+import moment from 'moment';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
@@ -47,7 +48,7 @@ function VideoList() {
                             />
                             <div>
                                 <h2>{video?.title}</h2>
-                                <h2>{video?._creationTime}</h2>
+                                <h2>{moment(video?._creationTime).fromNow()}</h2>
                             </div>
                         </div>
                     ))}
