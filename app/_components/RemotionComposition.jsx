@@ -1,54 +1,50 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { AbsoluteFill, Img, Sequence, useVideoConfig } from 'remotion';
 
-function RemotionComposition({videoData,setDurationInFrame}) {
-    
-    const captions=videoData?.cationJson;
-    const {fps}=useVideoConfig();
-    const imageList=videoData?.images;
-    console.log("videoData",videoData);
-    console.log("captions",captions);
-    console.log("imageList",imageList);
-    
+function RemotionComposition({videoData, setDurationInFrame}) {
+    const captions = videoData?.captionJson;
+    const { fps } = useVideoConfig();
+    const imageList = videoData?.images;
 
+    // Calculate totalDuration without side effects
+    const totalDuration = useMemo(() => {
+        if (!captions || captions.length === 0) return 0;
+        return captions[captions.length - 1].end * fps;
+    }, [captions, fps]);
+
+    // Set duration only once when calculated
     useEffect(() => {
-      videoData && getDurationFrame();
-    },[videoData])
+        if (totalDuration > 0) {
+            setDurationInFrame(totalDuration);
+        }
+    }, [totalDuration, setDurationInFrame]);
 
-    const getDurationFrame=()=>{
-      const totalDuration=captions[captions?.length-1]?.end * fps;
-      setDurationInFrame(totalDuration);
-      return totalDuration;
-    }
-
-  return (
-    <div>
-      <AbsoluteFill>
-
-
-      {imageList?.map((item,index)=>{
-        const startTime=(index*getDurationFrame())/imageList?.length;
-        const duration=getDurationFrame();
-        return(
-          <>
-          <Sequence key={index} from={startTime} durationInFrames={getDurationFrame()}>
-            <AbsoluteFill>
-              <Img
-              src={item}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-              }}
-              />
-            </AbsoluteFill>
-          </Sequence>
-          </>
-        )
-      })}
-      </AbsoluteFill>
-    </div>
-  )
+    return (
+        <AbsoluteFill>
+            {imageList?.map((item, index) => {
+                const startTime = (index * totalDuration) / imageList.length;
+                
+                return (
+                    <Sequence 
+                        key={index} 
+                        from={startTime} 
+                        durationInFrames={totalDuration}
+                    >
+                        <AbsoluteFill>
+                            <Img
+                                src={item}
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'cover',
+                                }}
+                            />
+                        </AbsoluteFill>
+                    </Sequence>
+                );
+            })}
+        </AbsoluteFill>
+    );
 }
 
-export default RemotionComposition
+export default RemotionComposition;

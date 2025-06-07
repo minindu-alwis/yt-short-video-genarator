@@ -17,8 +17,8 @@ useEffect(() => {
 }, [videoId]); // ✅ Correct
 
 
-  const GetVideoDateById=()=>{
-    const result=convex.query(api.videoData.GetVideoById,{
+  const GetVideoDateById=async()=>{
+    const result=await convex.query(api.videoData.GetVideoById,{
       videoId: videoId
     })
     console.log(result);
