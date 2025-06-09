@@ -21,6 +21,7 @@ function RemotionComposition({videoData, setDurationInFrame}) {
     }, [totalDuration, setDurationInFrame]);
 
     return (
+        <div>
         <AbsoluteFill>
             {imageList?.map((item, index) => {
                 const startTime = (index * totalDuration) / imageList.length;
@@ -54,8 +55,13 @@ function RemotionComposition({videoData, setDurationInFrame}) {
                     </Sequence>
                 );
             })}
-            {videoData?.audioUrl && <Audio src={videoData?.audioUrl}/>}
+            
         </AbsoluteFill>
+        <AbsoluteFill>
+            <h2></h2>
+        </AbsoluteFill>
+        {videoData?.audioUrl && <Audio src={videoData?.audioUrl}/>}
+        </div>
     );
 }
 
