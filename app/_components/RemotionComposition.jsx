@@ -79,7 +79,7 @@ function RemotionComposition({videoData, setDurationInFrame}) {
                 
             }}
         >
-            <h2 className={videoData.caption?.style}>{getCurrentCaption()}</h2>
+            <h2 className={videoData?.caption?.style}>{getCurrentCaption()}</h2>
         </AbsoluteFill>
 
         </div>
