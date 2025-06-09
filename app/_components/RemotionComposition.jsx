@@ -7,8 +7,6 @@ function RemotionComposition({videoData, setDurationInFrame}) {
     const { fps } = useVideoConfig();
     const imageList = videoData?.images;
     const frame=useCurrentFrame();
-    console.log('videoData', videoData);
-    
 
     // Calculate totalDuration without side effects
     const totalDuration = useMemo(() => {
@@ -31,8 +29,6 @@ function RemotionComposition({videoData, setDurationInFrame}) {
         
         return currentCaption ? currentCaption?.word : '';
     }
-
-    
 
     return (
         <div>
@@ -83,7 +79,7 @@ function RemotionComposition({videoData, setDurationInFrame}) {
                 
             }}
         >
-            <h2 className={videoData.caption.style}>{getCurrentCaption()}</h2>
+            <h2 className={videoData.caption?.style}>{getCurrentCaption()}</h2>
         </AbsoluteFill>
 
         </div>
