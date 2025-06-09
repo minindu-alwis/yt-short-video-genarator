@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useMemo } from 'react'
 import { AbsoluteFill, Audio, Img, interpolate, Sequence, useCurrentFrame, useVideoConfig } from 'remotion';
 
@@ -19,6 +20,15 @@ function RemotionComposition({videoData, setDurationInFrame}) {
             setDurationInFrame(totalDuration);
         }
     }, [totalDuration, setDurationInFrame]);
+
+    const getCurrentCaption = () => {
+        const currentTime = frame / fps;
+        const currentCaption = captions?.find(item => 
+            currentTime >= item?.start && currentTime <= item?.end
+        ); 
+        
+        return currentCaption ? currentCaption?.word : '';
+    }
 
     return (
         <div>
@@ -59,9 +69,9 @@ function RemotionComposition({videoData, setDurationInFrame}) {
             
         </AbsoluteFill>
         <AbsoluteFill>
-            <h2></h2>
+            <h2>{getCurrentCaption()}</h2>
         </AbsoluteFill>
-        
+
         </div>
     );
 }
