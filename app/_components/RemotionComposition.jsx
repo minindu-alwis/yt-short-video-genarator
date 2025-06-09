@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react'
-import { AbsoluteFill, Img, interpolate, Sequence, useCurrentFrame, useVideoConfig } from 'remotion';
+import { AbsoluteFill, Audio, Img, interpolate, Sequence, useCurrentFrame, useVideoConfig } from 'remotion';
 
 function RemotionComposition({videoData, setDurationInFrame}) {
     const captions = videoData?.captionJson;
@@ -54,6 +54,7 @@ function RemotionComposition({videoData, setDurationInFrame}) {
                     </Sequence>
                 );
             })}
+            {videoData?.audioUrl && <Audio src={videoData?.audioUrl}/>}
         </AbsoluteFill>
     );
 }
