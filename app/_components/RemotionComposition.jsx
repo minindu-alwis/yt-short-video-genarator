@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo } from 'react'
 import { AbsoluteFill, Img, interpolate, Sequence, useCurrentFrame, useVideoConfig } from 'remotion';
 
-function RemotionComposition({ videoData, setDurationInFrame }) {
+function RemotionComposition({videoData, setDurationInFrame}) {
     const captions = videoData?.captionJson;
     const { fps } = useVideoConfig();
     const imageList = videoData?.images;
-    const frame = useCurrentFrame();
+    const frame=useCurrentFrame();
 
     // Calculate totalDuration without side effects
     const totalDuration = useMemo(() => {
@@ -24,20 +24,20 @@ function RemotionComposition({ videoData, setDurationInFrame }) {
         <AbsoluteFill>
             {imageList?.map((item, index) => {
                 const startTime = (index * totalDuration) / imageList.length;
-                const scale = (index) => interpolate(
+                const scale=(index)=>interpolate(
                     frame,
-                    [startTime, startTime + totalDuration * 0.3, startTime + totalDuration * 0.7, startTime + totalDuration],
-                    index % 2 == 0 ? [1, 1.2, 0.95, 1] : [1, 0.8, 1.15, 1],
+                    [startTime, startTime + totalDuration/2,startTime+ totalDuration],
+                    index%2==0?[1,1.8,1]:[1.8,1,1.8],
                     {
                         extrapolateLeft: 'clamp',
                         extrapolateRight: 'clamp',
                     }
                 )
-
+                
                 return (
-                    <Sequence
-                        key={index}
-                        from={startTime}
+                    <Sequence 
+                        key={index} 
+                        from={startTime} 
                         durationInFrames={totalDuration}
                     >
                         <AbsoluteFill>
