@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo } from 'react'
 import { AbsoluteFill, Audio, Img, interpolate, Sequence, useCurrentFrame, useVideoConfig } from 'remotion';
 
-function RemotionComposition({videoData, setDurationInFrame}) {
+function RemotionComposition({videoData,setDurationInFrame}) {
     const captions = videoData?.captionJson;
     const { fps } = useVideoConfig();
     const imageList = videoData?.images;
@@ -14,7 +14,6 @@ function RemotionComposition({videoData, setDurationInFrame}) {
         return captions[captions.length - 1].end * fps;
     }, [captions, fps]);
 
-    // Set duration only once when calculated
     useEffect(() => {
         if (totalDuration > 0) {
             setDurationInFrame(totalDuration);
