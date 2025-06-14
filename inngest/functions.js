@@ -4,6 +4,7 @@ import { createClient } from "@deepgram/sdk";
 import { GenarateImageScript } from "@/configs/AiModel";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@/convex/_generated/api";
+import { getServices, renderMediaOnCloudrun } from '@remotion/cloudrun/client';
 
 export const helloWorld = inngest.createFunction(
     { id: "hello-world" },
@@ -31,112 +32,142 @@ export const GenarateVideoData = inngest.createFunction(
     { event: "genarate-video-data" },
     async ({ event, step }) => {
 
-        const { script, topic, title, caption, videoStyle, voice ,recordId} = event?.data;
+        const { script, topic, title, caption, videoStyle, voice, recordId } = event?.data;
         const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL);
         //Genarate Audio file MP3
-        const GenarateAudioFile = await step.run(
-            "GenarateAudioFile", async () => {
+        // const GenarateAudioFile = await step.run(
+        //     "GenarateAudioFile", async () => {
 
-                const result = await axios.post(BASE_URL + '/api/text-to-speech',
-                    {
-                        input: script,
-                        voice: voice
-                    },
-                    {
-                        headers: {
-                            'x-api-key': process.env.NEXT_PUBLIC_AIGURULAB_API_KEY, // Your API Key
-                            'Content-Type': 'application/json', // Content Type
-                        },
-                    })
-                console.log(result.data.audio) //Output Result: Audio Mp3 Url
+        //         const result = await axios.post(BASE_URL + '/api/text-to-speech',
+        //             {
+        //                 input: script,
+        //                 voice: voice
+        //             },
+        //             {
+        //                 headers: {
+        //                     'x-api-key': process.env.NEXT_PUBLIC_AIGURULAB_API_KEY, // Your API Key
+        //                     'Content-Type': 'application/json', // Content Type
+        //                 },
+        //             })
+        //         console.log(result.data.audio) //Output Result: Audio Mp3 Url
 
 
-                return result.data.audio;
-                
-            });
+        //         return result.data.audio;
 
-        //Genarate Captions
-        const GenaratedCaptions = await step.run(
-            "genarateCaptions",
+        //     });
+
+        // //Genarate Captions
+        // const GenaratedCaptions = await step.run(
+        //     "genarateCaptions",
+        //     async () => {
+        //         const deepgram = createClient(process.env.NEXT_PUBLIC_DEEPGRAM_API_KEY);
+
+        //         const { result, error } = await deepgram.listen.prerecorded.transcribeUrl(
+        //             {
+        //                 url: GenarateAudioFile,
+        //             },
+        //             // STEP 3: Configure Deepgram options for audio analysis
+        //             {
+        //                 model: "nova-3",
+        //                 smart_format: true,
+        //             }
+        //         );
+        //         return result.results?.channels[0]?.alternatives[0]?.words;
+        //     }
+
+
+        // )
+
+        // //Genarate Image Promt From  Script
+        // const GenaratedImagePromts = await step.run(
+        //     "geanarateImagePromt",
+        //     async () => {
+        //         const FINAL_PROMPT = ImagePromtScript.replace
+        //             ('{style}', videoStyle).replace('script', script);
+        //         const result = await GenarateImageScript.sendMessage(FINAL_PROMPT);
+        //         const resp = JSON.parse(result.response.text());
+
+        //         return resp;
+        //     }
+        // )
+        // //Gwnarate Images using ai
+
+        // const GenarateImages = await step.run(
+        //     "genarateImages",
+        //     async () => {
+        //         let images = [];
+        //         images = await Promise.all(
+        //             GenaratedImagePromts.map(async (element) => {
+        //                 const result = await axios.post(BASE_URL + '/api/generate-image',
+        //                     {
+        //                         width: 1024,
+        //                         height: 1024,
+        //                         input: element?.imagePrompt,
+        //                         model: 'sdxl',//'flux'
+        //                         aspectRatio: "1:1"//Applicable to Flux model only
+        //                     },
+        //                     {
+        //                         headers: {
+        //                             'x-api-key': process.env.NEXT_PUBLIC_AIGURULAB_API_KEY2, // Your API Key
+        //                             'Content-Type': 'application/json', // Content Type
+        //                         },
+        //                     })
+        //                 console.log(result.data.image) //Output Result: Base 64 Image
+        //                 return result.data.image
+        //             })
+        //         )
+        //         return images;
+
+        //     }
+
+
+        // )
+
+        // //Save All To database
+        // const UpdateDB = await step.run(
+        //     'UpdateDB',
+        //     async () => {
+        //         const result = await convex.mutation(api.videoData.UpdateVideoRecord, {
+        //             recordId: recordId,
+        //             audioUrl: GenarateAudioFile,
+        //             captionJson: GenaratedCaptions,
+        //             images: GenarateImages
+        //         })
+        //         return result;
+        //     }
+
+        // )
+
+        const RenderVideo = await step.run(
+            "renderVideo",
             async () => {
-                const deepgram = createClient(process.env.NEXT_PUBLIC_DEEPGRAM_API_KEY);
+                const services = await getServices({
+                    region: 'us-east1',
+                    compatibleOnly: true,
+                });
 
-                const { result, error } = await deepgram.listen.prerecorded.transcribeUrl(
-                    {
-                        url: GenarateAudioFile,
-                    },
-                    // STEP 3: Configure Deepgram options for audio analysis
-                    {
-                        model: "nova-3",
-                        smart_format: true,
-                    }
-                );
-                return result.results?.channels[0]?.alternatives[0]?.words;
-            }
+                const serviceName = services[0].serviceName;
+                const result = await renderMediaOnCloudrun({
+                    serviceName,
+                    region: 'us-east1',
+                    serveUrl: process.env.GCP_SERVE_URL,
+                    composition: 'youtubeShort',
+                    inputProps: {},
+                    codec: 'h264',
+                    memoryLimit: '4Gi', // Increase memory
+                    cpuLimit: '2.0',   // Increase CPU
+                    timeoutInSeconds: 600, // Increase timeout
+                });
+                console.log("hutttoooooooooooo", result);
 
-
-        )
-
-        //Genarate Image Promt From  Script
-        const GenaratedImagePromts = await step.run(
-            "geanarateImagePromt",
-            async () => {
-                const FINAL_PROMPT = ImagePromtScript.replace
-                    ('{style}', videoStyle).replace('script', script);
-                const result = await GenarateImageScript.sendMessage(FINAL_PROMPT);
-                const resp = JSON.parse(result.response.text());
-
-                return resp;
+                if (result.type === 'success') {
+                    console.log(result.bucketName);
+                    console.log(result.renderId);
+                }
+                return result?.publicUrl;
             }
         )
-        //Gwnarate Images using ai
 
-        const GenarateImages = await step.run(
-            "genarateImages",
-            async () => {
-                let images = [];
-                images = await Promise.all(
-                    GenaratedImagePromts.map(async (element) => {
-                        const result = await axios.post(BASE_URL + '/api/generate-image',
-                            {
-                                width: 1024,
-                                height: 1024,
-                                input: element?.imagePrompt,
-                                model: 'sdxl',//'flux'
-                                aspectRatio: "1:1"//Applicable to Flux model only
-                            },
-                            {
-                                headers: {
-                                    'x-api-key': process.env.NEXT_PUBLIC_AIGURULAB_API_KEY2, // Your API Key
-                                    'Content-Type': 'application/json', // Content Type
-                                },
-                            })
-                        console.log(result.data.image) //Output Result: Base 64 Image
-                            return result.data.image
-                    })
-                )
-                return images;
-                
-            }
-            
-            
-        )
-
-        //Save All To database
-        const UpdateDB=await step.run(
-            'UpdateDB',
-            async()=>{
-                const result=await convex.mutation(api.videoData.UpdateVideoRecord,{
-                    recordId: recordId,
-                    audioUrl: GenarateAudioFile,
-                    captionJson:GenaratedCaptions,
-                    images:GenarateImages
-                })
-                return result;
-            }
-
-        )
-
-        return 'Execution Completed Successfully!';
+        return RenderVideo;
     }
 )
