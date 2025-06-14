@@ -3,9 +3,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/configs/fireBaseConfig';
+
 import AuthContext from './_context/AuthContext';
 import { useMutation } from 'convex/react';
+
+import { auth } from '@/configs/fireBaseConfig';
 import { api } from '@/convex/_generated/api';
 
 function Provider({ children }) {
