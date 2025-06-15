@@ -7,12 +7,12 @@ import { useVideoConfig } from 'remotion';
 
 function RemotionPlayer({videoData}) {
 
-  const [durationInFrame,setDurationInFrame]=useState(100)
+  // const [durationInFrame,setDurationInFrame]=useState(100)
   return (
     <div>
          <Player
       component={RemotionComposition}
-      durationInFrames={Number(durationInFrame.toFixed(0)) + 100}
+       durationInFrames={videoData?.captionJson?Number((videoData?.captionJson[videoData?.captionJson?.length-1]?.end * 30).toFixed(0)):200}
       compositionWidth={720}
       compositionHeight={1280}
       fps={30}
@@ -23,7 +23,7 @@ function RemotionPlayer({videoData}) {
       }}
       inputProps={{
         videoData:videoData,
-        setDurationInFrame:(frameValue)=>setDurationInFrame(frameValue)
+        
       }}
     />
     </div>
