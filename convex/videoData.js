@@ -39,7 +39,8 @@ export const UpdateVideoRecord=mutation({
         recordId:v.id('videoData'),
         audioUrl:v.string(),
         images: v.array(v.string()),
-        captionJson: v.any()
+        captionJson: v.any(),
+        downloadUrl: v.optional(v.string())
     },
     handler:async(ctx,args)=>{
         const result=await ctx.db.patch(args.recordId, {
