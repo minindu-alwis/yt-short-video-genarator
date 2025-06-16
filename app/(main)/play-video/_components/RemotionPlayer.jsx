@@ -9,7 +9,7 @@ function RemotionPlayer({videoData}) {
 
   // const [durationInFrame,setDurationInFrame]=useState(100)
   return (
-    <div>
+    <div className="w-full aspect-[9/16] max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-xl mx-auto">
          <Player
       component={RemotionComposition}
        durationInFrames={videoData?.captionJson?Number((videoData?.captionJson[videoData?.captionJson?.length-1]?.end * 30).toFixed(0)):200}
@@ -18,8 +18,9 @@ function RemotionPlayer({videoData}) {
       fps={30}
       controls
       style={{
-        width:'25vw',
-        height:'70vh'
+        width: '100%',
+          height: '100%',
+          borderRadius: '0.5rem'
       }}
       inputProps={{
         videoData:videoData,
