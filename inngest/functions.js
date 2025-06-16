@@ -4,7 +4,6 @@ import { createClient } from "@deepgram/sdk";
 import { GenarateImageScript } from "@/configs/AiModel";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@/convex/_generated/api";
-import { getServices, renderMediaOnCloudrun } from '@remotion/cloudrun/client';
 
 export const helloWorld = inngest.createFunction(
     { id: "hello-world" },
@@ -32,9 +31,9 @@ export const GenarateVideoData = inngest.createFunction(
     { event: "genarate-video-data" },
     async ({ event, step }) => {
 
-        const { script, topic, title, caption, videoStyle, voice, recordId } = event?.data;
+        const { script, topic, title, caption, videoStyle, voice ,recordId} = event?.data;
         const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL);
-       // Genarate Audio file MP3
+        //Genarate Audio file MP3
         const GenarateAudioFile = await step.run(
             "GenarateAudioFile", async () => {
 
@@ -53,7 +52,7 @@ export const GenarateVideoData = inngest.createFunction(
 
 
                 return result.data.audio;
-
+                
             });
 
         //Genarate Captions
@@ -113,81 +112,31 @@ export const GenarateVideoData = inngest.createFunction(
                                 },
                             })
                         console.log(result.data.image) //Output Result: Base 64 Image
-                        return result.data.image
+                            return result.data.image
                     })
                 )
                 return images;
-
+                
             }
-
-
+            
+            
         )
 
         //Save All To database
-        const UpdateDB = await step.run(
+        const UpdateDB=await step.run(
             'UpdateDB',
-            async () => {
-                const result = await convex.mutation(api.videoData.UpdateVideoRecord, {
+            async()=>{
+                const result=await convex.mutation(api.videoData.UpdateVideoRecord,{
                     recordId: recordId,
                     audioUrl: GenarateAudioFile,
-                    captionJson: GenaratedCaptions,
-                    images: GenarateImages
+                    captionJson:GenaratedCaptions,
+                    images:GenarateImages
                 })
                 return result;
             }
 
         )
 
-        const RenderVideo = await step.run(
-            "renderVideo",
-            async () => {
-                const services = await getServices({
-                    region: 'us-east1',
-                    compatibleOnly: true,
-                });
-
-                const serviceName = services[0].serviceName;
-                const result = await renderMediaOnCloudrun({
-                    serviceName,
-                    region: 'us-east1',
-                    serveUrl: process.env.GCP_SERVE_URL,
-                    composition: 'youtubeShort',
-                    inputProps: {
-                        videoData: {
-                            audioUrl: GenarateAudioFile,
-                            captionJson: GenaratedCaptions,
-                            images: GenarateImages
-                        }
-                    },
-                    codec: 'h264',
-                    memoryLimit: '4Gi', // Increase memory
-                    cpuLimit: '2.0',   // Increase CPU
-                    timeoutInSeconds: 600, // Increase timeout
-                });
-                console.log("hutttoooooooooooo", result);
-
-                if (result.type === 'success') {
-                    console.log(result.bucketName);
-                    console.log(result.renderId);
-                }
-                return result?.publicUrl;
-            }
-        )
-
-        const UpdateDownloadUrl = await step.run(
-            'UpdateDownloadUrl',
-            async () => {
-                const result = await convex.mutation(api.videoData.UpdateVideoRecord, {
-                    recordId: recordId,
-                    audioUrl: GenarateAudioFile,
-                    captionJson: GenaratedCaptions,
-                    images: GenarateImages,
-                    downloadUrl: RenderVideo
-                })
-                return result;
-            }
-        )
-
-        return RenderVideo;
+        return 'Execution Completed Successfully!';
     }
 )
