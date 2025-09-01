@@ -168,9 +168,6 @@ const customTemplate = {
 | Variable | Description | Required |
 |----------|-------------|----------|
 | `OPENAI_API_KEY` | OpenAI API key for content generation | ✅ |
-| `YOUTUBE_API_KEY` | YouTube Data API key | ✅ |
-| `DATABASE_URL` | Database connection string | ⚠️ |
-| `NEXTAUTH_SECRET` | Authentication secret | ⚠️ |
 
 ### Customization Options
 
