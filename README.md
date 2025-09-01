@@ -94,10 +94,6 @@ Make sure you have the following installed:
    bun dev
    ```
 
-5. **Open your browser**
-   
-   Navigate to [http://localhost:3000](http://localhost:3000) to see the application in action!
-
 ## 💡 How It Works
 
 ```mermaid
