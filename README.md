@@ -10,6 +10,8 @@
 <div align="center">
   <h3>🚀 Create engaging YouTube Shorts with AI-powered automation</h3>
   <p>Transform your ideas into viral-ready short-form content in minutes</p>
+  
+  **🌐 Live Demo: [https://yt-short-video-genarator.vercel.app](https://yt-short-video-genarator.vercel.app)**
 </div>
 
 ---
@@ -38,7 +40,9 @@
 
 ## 🎥 Demo
 
-> *Add your demo video or GIF here*
+**🌐 Live Demo:** [https://yt-short-video-genarator.vercel.app](https://yt-short-video-genarator.vercel.app)
+
+> *Try the application live to see how easy it is to create YouTube Shorts!*
 
 ```
 🎬 Watch how easy it is to create your first YouTube Short!
@@ -240,7 +244,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🚀 Deployment
 
-### Deploy on Vercel
+### 🌐 Live Application
+**Try it now:** [https://yt-short-video-genarator.vercel.app](https://yt-short-video-genarator.vercel.app)
+
+### Deploy Your Own Instance
+
+#### Deploy on Vercel
 
 The easiest way to deploy your YouTube Short Video Generator is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
 
