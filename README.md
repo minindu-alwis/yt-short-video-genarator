@@ -50,7 +50,7 @@
 ### Prerequisites
 
 Make sure you have the following installed:
-- **Node.js** (v18 or higher)
+- **Node.js** (v18 or higher) 😍😍😍
 - **npm**, **yarn**, **pnpm**, or **bun**
 
 ### Installation
@@ -104,7 +104,7 @@ graph LR
     D --> E[📱 YouTube Short Export]
 ```
 
-1. **Topic Input**: Enter your desired topic or niche
+1. **Topic Input**: Enter your desired topic or niche 💕💕💕
 2. **AI Processing**: Our AI generates engaging scripts and scene suggestions
 3. **Template Application**: Choose from professionally designed templates
 4. **Video Generation**: Automated assembly with transitions and effects
@@ -112,7 +112,7 @@ graph LR
 
 ## 🛠️ Technology Stack
 
-- **Frontend**: Next.js 14, React 18
+- **Frontend**: Next.js 14, React 18 😘
 - **Styling**: Tailwind CSS
 - **AI Integration**: OpenAI GPT API
 - **Video Processing**: FFmpeg, Canvas API
