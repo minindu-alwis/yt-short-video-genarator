@@ -9,7 +9,7 @@
 
 <div align="center">
   <h3>🚀 Create engaging YouTube Shorts with AI-powered automation</h3>
-  <p>Transform your ideas into viral-ready short-form content in minutes</p>
+  <p>Transform your ideas into viral-ready short-form content in minutes 😍😍😍😍😍</p>
 </div>
 
 ---
