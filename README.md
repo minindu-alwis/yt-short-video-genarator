@@ -1,11 +1,25 @@
 # 🎬 YouTube Short Video Generator
 
 <div align="center">
-  <marquee>
-  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" />
-  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
-</marquee>
+ <div style={{ overflow: 'hidden', whiteSpace: 'nowrap' }}>
+  <div style={{
+    display: 'inline-block',
+    animation: 'scroll 10s linear infinite'
+  }}>
+    <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" />
+    <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
+  </div>
+
+  <style>
+    {`
+      @keyframes scroll {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+      }
+    `}
+  </style>
+</div>
 BackEnd
 
 What are the differences between Array and ArrayList in Java? MAIN ANSWEA NOT COME
