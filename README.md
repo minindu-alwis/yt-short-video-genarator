@@ -1,10 +1,43 @@
 # 🎬 YouTube Short Video Generator
 
 <div align="center">
+  <marquee>
   <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" />
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
-  <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube" />
+</marquee>
+BackEnd
+
+What are the differences between Array and ArrayList in Java? MAIN ANSWEA NOT COME
+
+
+What are the key differences between a HashMap and a List in Java?
+
+	Can a HashMap have duplicates ?
+
+
+What is a functional interface in Java? no
+
+
+Which Spring annotation tells the framework to automatically create and manage an object of a class? 
+
+
+
+FrontEnd
+
+What is the purpose of using React in web development? MAIN ANSER NOT COME
+
+Does React use a Virtual DOM or a real DOM?
+	can you explin the virtul dom ? - ITS CORRECT
+
+
+What is the difference between state and props in React? @ PROPS KNOW  STATE NORMAL
+
+
+
+Do you know about the useEffect hook in React? CORRECT
+	
+   if useEffect has an empty dependency array [], how many times does it run after the component renders?@CORRECT
 </div>
 
 <div align="center">
