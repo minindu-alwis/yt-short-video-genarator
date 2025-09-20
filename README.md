@@ -1,4 +1,4 @@
-# 🎬 YouTube Short Video Generator
+# 🎬 YouTube Short Video Generator - Short Boom
 
 <div align="center">
   <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" />
