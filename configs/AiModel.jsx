@@ -3,10 +3,9 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
 
 const model = genAI.getGenerativeModel({
-  model: "models/gemini-1.5-flash",
+  model: "gemini-pro",
   generationConfig: {
-    responseMimeType: "application/json",
-    temperature: 0.7,  // Slightly less random
+    temperature: 0.7,
     topP: 0.85,
   },
  systemInstruction: `You are a STRICT transportation script generator. When given "bike and bus":
